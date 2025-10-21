@@ -1,0 +1,183 @@
+:root {
+    --primary-color: #87CEEB;
+    --secondary-color: #f8f9fa;
+    --text-color: #333;
+    --light-gray: #e9ecef;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: #f5f7fa;
+}
+
+.navbar {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+    font-weight: 600;
+}
+
+.status-badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.status-belum {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-selesai {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.filter-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+.admin-link {
+    color: white;
+    text-decoration: none;
+}
+
+.admin-link:hover {
+    color: #f8f9fa;
+    text-decoration: underline;
+}
+
+.login-container {
+    max-width: 450px;
+    width: 100%;
+    margin: 100px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h3 {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.sidebar {
+    background-color: white;
+    min-height: calc(100vh - 56px);
+    box-shadow: 2px 0 5px rgba(0,0,0,.05);
+    padding-top: 20px;
+}
+
+.sidebar .nav-link {
+    color: var(--text-color);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+}
+
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #6bb6d6;
+    border-color: #6bb6d6;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(135, 206, 235, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.visibility-badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.visibility-visible {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.visibility-hidden {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.table th {
+    border-top: none;
+}
+
+.btn-pdf {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.btn-pdf:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.pdf-icon {
+    color: #dc3545;
+}
+
+.page-section {
+    display: none;
+}
+
+.page-section.active {
+    display: block;
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Catatan PR Siswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Catatan PR Siswa - Admin Panel</a>
+            <div class="ms-auto">
+                <button class="btn btn-outline-light" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showPage('dashboard')">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('add-pr')">
+                            <i class="bi bi-plus-circle"></i> Tambah PR
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <!-- Dashboard Page -->
+                <div id="dashboard-page" class="page-section active">
+                    <h2 class="mb-4">Dashboard Admin</h2>
+                    
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Daftar PR</span>
+                            <button onclick="showPage('add-pr')" class="btn btn-primary btn-sm">
+                                <i class="bi bi-plus-circle"></i> Tambah PR
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Mata Pelajaran</th>
+                                            <th>Judul PR</th>
+                                            <th>Deadline</th>
+                                            <th>Status</th>
+                                            <th>PDF</th>
+                                            <th>Visibilitas</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-pr-list">
+                                        <!-- PR rows will be inserted here by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add PR Page -->
+                <div id="add-pr-page" class="page-section">
+                    <h2 class="mb-4">Tambah PR Baru</h2>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="add-pr-form">
+                                <div class="mb-3">
+                                    <label for="add-subject" class="form-label">Mata Pelajaran</label>
+                                    <input type="text" class="form-control" id="add-subject" name="subject" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="add-title" class="form-label">Judul PR</label>
+                                    <input type="text" class="form-control" id="add-title" name="title" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="add-description" class="form-label">Deskripsi</label>
+                                    <textarea class="form-control" id="add-description" name="description" rows="3"></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="add-deadline" class="form-label">Tanggal Deadline</label>
+                                    <input type="date" class="form-control" id="add-deadline" name="deadline" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="add-pdf-url" class="form-label">URL PDF (Opsional)</label>
+                                    <input type="url" class="form-control" id="add-pdf-url" placeholder="https://example.com/file.pdf">
+                                    <div class="form-text">Masukkan URL PDF jika ada</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="status" id="add-status-belum" value="belum" checked>
+                                        <label class="form-check-label" for="add-status-belum">
+                                            Belum Dikerjakan
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="status" id="add-status-selesai" value="selesai">
+                                        <label class="form-check-label" for="add-status-selesai">
+                                            Selesai Dikerjakan
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="is_visible" id="add-is-visible" checked>
+                                        <label class="form-check-label" for="add-is-visible">
+                                            Tampilkan di halaman publik
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" onclick="showPage('dashboard')" class="btn btn-outline-secondary">Batal</button>
+                                    <button type="submit" class="btn btn-primary">Simpan PR</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Edit PR Page -->
+                <div id="edit-pr-page" class="page-section">
+                    <h2 class="mb-4">Edit PR</h2>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="edit-pr-form">
+                                <input type="hidden" id="edit-id" name="id">
+                                
+                                <div class="mb-3">
+                                    <label for="edit-subject" class="form-label">Mata Pelajaran</label>
+                                    <input type="text" class="form-control" id="edit-subject" name="subject" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-title" class="form-label">Judul PR</label>
+                                    <input type="text" class="form-control" id="edit-title" name="title" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-description" class="form-label">Deskripsi</label>
+                                    <textarea class="form-control" id="edit-description" name="description" rows="3"></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-deadline" class="form-label">Tanggal Deadline</label>
+                                    <input type="date" class="form-control" id="edit-deadline" name="deadline" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-pdf-url" class="form-label">URL PDF (Opsional)</label>
+                                    <input type="url" class="form-control" id="edit-pdf-url" placeholder="https://example.com/file.pdf">
+                                </div>
+                                
+                                <div class="mb-3" id="current-pdf-container" style="display: none;">
+                                    <label class="form-label">PDF Saat Ini</label>
+                                    <div class="d-flex align-items-center">
+                                        <a id="current-pdf-link" href="#" target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                                            <i class="bi bi-file-pdf"></i> Lihat PDF
+                                        </a>
+                                        <button type="button" id="remove-pdf-btn" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i> Hapus
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="status" id="edit-status-belum" value="belum">
+                                        <label class="form-check-label" for="edit-status-belum">
+                                            Belum Dikerjakan
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="status" id="edit-status-selesai" value="selesai">
+                                        <label class="form-check-label" for="edit-status-selesai">
+                                            Selesai Dikerjakan
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="is_visible" id="edit-is-visible">
+                                        <label class="form-check-label" for="edit-is-visible">
+                                            Tampilkan di halaman publik
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" onclick="showPage('dashboard')" class="btn btn-outline-secondary">Batal</button>
+                                    <button type="submit" class="btn btn-primary">Update PR</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+    <script src="auth.js"></script>
+    <script src="database.js"></script>
+</body>
+</html>
